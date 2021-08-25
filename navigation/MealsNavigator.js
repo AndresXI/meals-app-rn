@@ -87,7 +87,10 @@ const FiltersNavigator = createStackNavigator(
 
 const MainNavigator = createDrawerNavigator(
   {
-    MealsFavorite: MealsFavTabNavigator,
+    MealsFavorite: {
+      screen: MealsFavTabNavigator,
+      navigationOptions: { drawerLabel: 'Meals' },
+    },
     Filters: FiltersNavigator,
   },
   {
@@ -95,6 +98,9 @@ const MainNavigator = createDrawerNavigator(
       activeTintColor: Colors.accentColor,
       labelStyle: {
         fontFamily: 'open-sans-bold',
+      },
+      itemsContainerStyle: {
+        paddingTop: '20%',
       },
     },
   }

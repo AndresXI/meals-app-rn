@@ -20,7 +20,6 @@ FavoritesScreen.navigationOptions = (navData) => {
           title='Menu'
           iconName='ios-menu'
           onPress={() => {
-            console.log('press')
             navData.navigation.toggleDrawer()
           }}
         />

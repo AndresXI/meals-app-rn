@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { enableScreens } from 'react-native-screens'
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
 
 import MealsNavigator from './navigation/MealsNavigator'
 
@@ -28,7 +29,11 @@ export default function App() {
     )
   }
 
-  return <MealsNavigator />
+  return (
+    <SafeAreaProvider>
+      <MealsNavigator />
+    </SafeAreaProvider>
+  )
 }
 
 const styles = StyleSheet.create({})

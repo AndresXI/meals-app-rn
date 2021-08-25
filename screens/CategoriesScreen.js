@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { CATEGORIES } from '../data/dummy-data'
 import HeaderButton from '../components/HeaderButton'
