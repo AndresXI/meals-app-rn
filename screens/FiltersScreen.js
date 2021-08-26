@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet, Switch, Platform } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
@@ -11,7 +11,6 @@ const FilterSwitch = (props) => {
       <Text>{props.label}</Text>
       <Switch
         thumbColor={Platform.OS === 'android' ? Colors.primaryColor : ''}
-        trackColor={{ true: Colors.primaryColor }}
         onValueChange={props.onChange}
         value={props.state}
       />
@@ -20,10 +19,26 @@ const FilterSwitch = (props) => {
 }
 
 const FiltersScreen = (props) => {
+  const { navigation } = props
+
   const [isGlutenFree, setIsGlutenFree] = useState(false)
   const [isLactoseFree, setIsLactoseFree] = useState(false)
   const [isVegan, setIsVegan] = useState(false)
   const [isVegetarian, setIsVegetarian] = useState(false)
+
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegetarian: isVegetarian,
+    }
+    console.log('applied filters', appliedFilters)
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
+
+  useEffect(() => {
+    navigation.setParams({ save: saveFilters })
+  }, [saveFilters])
 
   return (
     <View style={styles.screen}>
@@ -68,11 +83,23 @@ FiltersScreen.navigationOptions = (navData) => {
         />
       </HeaderButtons>
     ),
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title='Save'
+          iconName='ios-save'
+          onPress={() => {
+            navData.navigation.getParam('save')()
+          }}
+        />
+      </HeaderButtons>
+    ),
   }
 }
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
     alignItems: 'center',
   },
   title: {
@@ -83,7 +110,7 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
     marginVertical: 15,
