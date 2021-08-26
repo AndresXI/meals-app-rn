@@ -3,11 +3,18 @@ import { StyleSheet, Text, View } from 'react-native'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { enableScreens } from 'react-native-screens'
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 
+import mealsReducer from './store/reducers/meals'
 import MealsNavigator from './navigation/MealsNavigator'
 
 enableScreens()
+
+const rootReducer = combineReducers({
+  meals: mealsReducer,
+})
+const store = createStore(rootReducer)
 
 const FetchFonts = () => {
   return Font.loadAsync({
@@ -30,9 +37,9 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
+    <Provider store={store}>
       <MealsNavigator />
-    </SafeAreaProvider>
+    </Provider>
   )
 }
 
