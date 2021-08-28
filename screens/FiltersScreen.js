@@ -71,7 +71,7 @@ export default FiltersScreen
 FiltersScreen.navigationOptions = (navData) => {
   return {
     headerTitle: 'Filter Meals',
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title='Menu'
@@ -82,7 +82,7 @@ FiltersScreen.navigationOptions = (navData) => {
         />
       </HeaderButtons>
     ),
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title='Save'

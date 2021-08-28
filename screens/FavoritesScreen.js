@@ -8,13 +8,13 @@ import MealList from '../components/MealList'
 const FavoritesScreen = (props) => {
   const favoriteMeals = useSelector((state) => state.meals.favoriteMeals)
 
-  return <MealList listData={favMeals} navigation={props.navigation} />
+  return <MealList listData={favoriteMeals} navigation={props.navigation} />
 }
 
 FavoritesScreen.navigationOptions = (navData) => {
   return {
     headerTitle: 'Your Favorites',
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title='Menu'
